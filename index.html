@@ -2,7 +2,7 @@
 :root{--bg:#f5f3ee;--card:#fffdf9;--ink:#17211b;--muted:#667068;--green:#27664a;--soft:#e8f0ea;--blue:#006eb7;--line:#17211b1c}*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden}body{color:var(--ink);background:var(--bg);font:15px system-ui,-apple-system,"Segoe UI",sans-serif}.app{display:grid;grid-template-rows:minmax(0,1fr) auto;height:100svh}.top{padding:max(12px,env(safe-area-inset-top)) 15px 7px}.brand{margin:0;color:var(--green);font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.top h1{margin:1px 0 0;font-size:1.55rem}.main{position:relative;min-height:0}.view{position:absolute;inset:2px 10px 7px;display:none}.view.active{display:block}.panel{width:100%;height:100%;overflow:hidden;border:1px solid var(--line);border-radius:21px;background:var(--card);box-shadow:0 10px 30px #1b2a2114}.scroll{height:100%;overflow:auto;padding:14px;overscroll-behavior:contain}.hero{display:flex;align-items:center;gap:12px;padding:15px;border-radius:19px;background:linear-gradient(135deg,#e7f0ea,#f7f7f2)}.hero .emoji{font-size:3rem}.temp{font-size:2.8rem;font-weight:800;line-height:.9}.muted{color:var(--muted)}h2,h3,p{margin-top:0}.hello{margin-bottom:5px;font-size:2rem;line-height:1}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}.metric,.card{padding:12px;border-radius:15px;background:#f1f4ef}.metric{text-align:center}.metric small,.card small{display:block;color:var(--muted);font-size:.68rem}.metric strong{font-size:.84rem}.section-title{margin:15px 2px 8px;font-size:1rem}.event{display:block;margin-bottom:7px;padding:12px;border:1px solid var(--line);border-radius:15px;color:inherit;text-decoration:none}.event strong{display:block}.event span{display:block;margin-top:3px;color:var(--muted);font-size:.77rem}.button{display:flex;min-height:43px;align-items:center;justify-content:center;margin-top:9px;border:0;border-radius:13px;background:var(--blue);color:white;font-weight:750;text-decoration:none}.outdoor-list{display:grid;gap:8px}.outdoor{display:flex;gap:11px;align-items:center;padding:13px;border-radius:15px;background:#f1f4ef}.outdoor b{display:block}.outdoor span{color:var(--muted);font-size:.76rem}.outdoor-content{min-width:0;flex:1}.place-list{display:grid;gap:5px;margin-top:6px}.place-item{display:flex;justify-content:space-between;gap:8px;color:inherit;text-decoration:none;font-size:.79rem}.place-item span:first-child{color:var(--ink)}.place-distance{white-space:nowrap}.bigicon{font-size:1.55rem}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:5px 5px max(5px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:#fffdf9}.tab{display:grid;min-width:0;min-height:56px;place-items:center;align-content:center;gap:2px;border:0;border-radius:13px;color:var(--muted);background:transparent}.tab i{font-style:normal;font-size:1.12rem}.tab span{max-width:100%;overflow:hidden;font-size:.58rem;font-weight:750;text-overflow:ellipsis;white-space:nowrap}.tab[aria-selected=true]{color:#1e503a;background:var(--soft)}.home-panel{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto}.quick-departures{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:8px;border-top:1px solid var(--line);background:var(--card)}.departure-button{min-height:48px;border:0;border-radius:14px;background:#edf0eb;color:var(--ink);font-size:.9rem;font-weight:800}.departure-button.on{color:white;background:var(--blue)}.home-transport{display:none;min-height:0;background:white}.home-panel.transport-open .scroll{display:none}.home-panel.transport-open .home-transport{display:block}.home-transport iframe{display:block;width:100%;height:100%;border:0}iframe{width:100%;height:100%;border:0}.services{display:grid;gap:8px}.notice{padding:11px;border-radius:14px;background:#fff4df;color:#704d11;font-size:.8rem}@media(max-height:670px){.brand{display:none}.top{padding-bottom:4px}.top h1{font-size:1.35rem}.scroll{padding:10px}.hello{font-size:1.6rem}.hero{padding:11px}.hero .emoji{font-size:2.4rem}.temp{font-size:2.3rem}.section-title{margin-top:10px}.tab{min-height:49px}}
 </style></head><body><div class="app"><main class="main">
 <section class="view active" id="v-home"><div class="panel home-panel" id="home-panel"><div class="scroll"><h2 class="hello" id="hello">Hyvää päivää Leinelä</h2><p class="muted" id="date"></p><div class="hero"><div class="emoji" id="wicon">🌤️</div><div><div class="temp" id="temp">–°</div><div class="muted" id="condition">Haetaan säätä…</div></div></div><div class="grid"><div class="metric"><small>Tuntuu</small><strong id="feels">–°</strong></div><div class="metric"><small>Tänään</small><strong id="range">– / –</strong></div><div class="metric"><small>Sade</small><strong id="rain">– %</strong></div></div><h3 class="section-title">Seuraavat menot lähellä</h3><div id="home-events"><p class="muted">Haetaan tapahtumia…</p></div><h3 class="section-title">Seuraava kirjastoauto</h3><div class="event library-next"><strong id="next-library-date">Lasketaan päivämäärää…</strong><span>klo 18.30–18.45 · Leineläntie 11</span></div></div><div class="home-transport" id="home-transport"><iframe id="transport-frame" title="HSL lähdöt" loading="lazy"></iframe></div><div class="quick-departures" aria-label="Lähtönäytöt"><button class="departure-button" data-frame="train" aria-pressed="false">🚆 Juna</button><button class="departure-button" data-frame="bus" aria-pressed="false">🚌 Bussi</button></div></div></section>  <section class="view" id="v-events" hidden><div class="panel"><div class="scroll"><h2>📅 Menot lähellä</h2><p class="muted">Tulevat tapahtumat Leinelän lähialueella.</p><div id="events"><p>Haetaan tapahtumia…</p></div><a class="button" href="https://tapahtumat.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan tapahtumakalenteri</a></div></div></section>
-<section class="view" id="v-outdoors" hidden><div class="panel"><div class="scroll"><h2>🏃 Ulkoilu ja liikunta</h2><div class="outdoor-list"><div class="outdoor"><div class="bigicon" id="dry-icon">🌤️</div><div><b id="dry-text">Tarkistetaan seuraavat 3 tuntia…</b><span id="dry-detail"></span></div></div><div class="outdoor"><div class="bigicon">🌇</div><div><b id="sunset">Aurinko laskee –</b><span>Leinelän paikallisaika</span></div></div><div class="outdoor"><div class="bigicon">🏋️</div><div class="outdoor-content"><b>Ulkokuntosalit 1,5 km säteellä</b><div id="fitness-list" class="place-list"><span class="muted">Haetaan ulkokuntosaleja…</span></div></div></div><div class="outdoor"><div class="bigicon">🛝</div><div class="outdoor-content"><b>Leikkipaikat 1 km säteellä</b><div id="playground-list" class="place-list"><span class="muted">Haetaan leikkipaikkoja…</span></div></div></div></div><div class="notice" id="map-note" hidden>Karttakohteita ei saatu juuri nyt. Sää- ja auringonlaskutiedot toimivat silti.</div><a class="button" href="https://kartta.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan kartta</a></div></div></section>
+<section class="view" id="v-outdoors" hidden><div class="panel"><div class="scroll"><h2>🏃 Ulkoilu ja liikunta</h2><div class="outdoor-list"><div class="outdoor"><div class="bigicon" id="dry-icon">🌤️</div><div><b id="dry-text">Tarkistetaan seuraavat 3 tuntia…</b><span id="dry-detail"></span></div></div><div class="outdoor"><div class="bigicon">🌇</div><div><b id="sunset">Aurinko laskee –</b><span>Leinelän paikallisaika</span></div></div><div class="outdoor"><div class="bigicon">🏋️</div><div class="outdoor-content"><b>Ulkokuntosalit 1,5 km säteellä</b><div id="fitness-list" class="place-list"><span class="muted">Haetaan ulkokuntosaleja…</span></div></div></div><div class="outdoor"><div class="bigicon">🛝</div><div class="outdoor-content"><b>Leikkipaikat 1 km säteellä</b><div id="playground-list" class="place-list"><span class="muted">Haetaan leikkipaikkoja…</span></div></div></div></div><div class="notice" id="map-note" hidden>Karttakohteita ei saatu juuri nyt. Sää- ja auringonlaskutiedot toimivat silti.</div><a class="button" href="https://kartta.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan kartta</a><p class="muted" style="margin:8px 2px 0;font-size:.68rem">Liikuntapaikat: LIPAS / Jyväskylän yliopisto. Leikkipaikat: Pääkaupunkiseudun Palvelukartta. CC BY 4.0.</p></div></div></section>
 <section class="view" id="v-services" hidden><div class="panel"><div class="scroll"><h2>📍 Lähipalvelut</h2><div class="services"><div class="card"><small>Kirjastoauto</small><strong>Torstaisin 18.30–18.45</strong><p class="muted">Leineläntie 11</p></div><div class="card"><small>Jätskiauto</small><strong>Palaa maaliskuussa</strong><p class="muted">Reitti ja kellonajat lisätään, kun ne julkaistaan.</p></div></div></div></div></section>
 </main><nav class="tabs"><button class="tab" data-v="home" data-title="Etusivu" aria-selected="true"><i>⌂</i><span>Etusivu</span></button><button class="tab" data-v="events" data-title="Menot" aria-selected="false"><i>📅</i><span>Menot</span></button><button class="tab" data-v="outdoors" data-title="Ulkoilu ja liikunta" aria-selected="false"><i>🌲</i><span>Ulkoilu ja liikunta</span></button><button class="tab" data-v="services" data-title="Palvelut" aria-selected="false"><i>📍</i><span>Palvelut</span></button></nav></div><script>
 const LAT=60.322,LON=25.041,tabs=[...document.querySelectorAll('.tab')],views=[...document.querySelectorAll('.view')];function openTab(t){const v=document.getElementById('v-'+t.dataset.v);tabs.forEach(x=>x.setAttribute('aria-selected',x===t));views.forEach(x=>{let on=x===v;x.hidden=!on;x.classList.toggle('active',on)});history.replaceState(null,'','#'+t.dataset.v)}tabs.forEach(t=>t.onclick=()=>openTab(t));
@@ -58,27 +58,87 @@ async function events(){try{
 }}
 const eventsEl=document.getElementById('events'),homeEvents=document.getElementById('home-events');events();
 function distance(a,b,c,d){let R=6371000,x=(d-b)*Math.PI/180*Math.cos((a+c)*Math.PI/360),y=(c-a)*Math.PI/180;return Math.sqrt(x*x+y*y)*R}function m(v){return v<1000?Math.round(v/10)*10+' m':(v/1000).toFixed(1).replace('.',',')+' km'}
-function placeName(item){return (item.x.tags?.['name:fi']||item.x.tags?.name||'').trim()}
-function hasUsablePlaceName(item){const name=placeName(item);return name&&!/nimetön/i.test(name)}
-function placeListHTML(items){return items.map(item=>{const name=esc(placeName(item)),url=`https://www.openstreetmap.org/?mlat=${item.lat}&mlon=${item.lon}#map=18/${item.lat}/${item.lon}`;return `<a class="place-item" href="${url}" target="_blank" rel="noopener"><span>${name}</span><span class="place-distance">${m(item.dist)}</span></a>`}).join('')}
+function cleanName(value=''){return String(value||'').trim()}
+function hasUsableName(name){return name&&!/nimetön|namnlös|unnamed/i.test(name)}
+function mapLink(lat,lon){return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=18/${lat}/${lon}`}
+function placeListHTML(items){return items.map(item=>`<a class="place-item" href="${item.url||mapLink(item.lat,item.lon)}" target="_blank" rel="noopener"><span>${esc(item.name)}</span><span class="place-distance">${m(item.dist)}</span></a>`).join('')}
+function coordinatesFromGeometry(geometries){
+  const features=geometries?.features||[];
+  for(const feature of features){
+    const geometry=feature?.geometry||feature;
+    const c=geometry?.coordinates;
+    if(geometry?.type==='Point'&&Array.isArray(c)&&Number.isFinite(c[0])&&Number.isFinite(c[1]))return {lat:c[1],lon:c[0]};
+    if(geometry?.type==='LineString'&&Array.isArray(c)&&c.length){const p=c[Math.floor(c.length/2)];if(Number.isFinite(p?.[0])&&Number.isFinite(p?.[1]))return {lat:p[1],lon:p[0]}}
+    if(geometry?.type==='Polygon'&&Array.isArray(c?.[0])&&c[0].length){const p=c[0][0];if(Number.isFinite(p?.[0])&&Number.isFinite(p?.[1]))return {lat:p[1],lon:p[0]}}
+  }
+  return null;
+}
+function listFromPayload(payload){return Array.isArray(payload)?payload:(payload?.results||payload?.items||payload?.data||[])}
+async function fetchJson(url){const r=await fetch(url,{headers:{Accept:'application/json'}});if(!r.ok)throw new Error(`HTTP ${r.status}: ${url}`);return r.json()}
+async function loadFitness(){
+  // Vantaa = kuntakoodi 92. Tyyppikoodit haetaan ensin LIPASin omasta luokituksesta,
+  // jotta toteutus ei ole sidottu yhteen käsin kirjoitettuun koodiin.
+  const categories=await fetchJson('https://api.lipas.fi/v2/sports-site-categories');
+  const categoryItems=listFromPayload(categories);
+  const fitnessCodes=[];
+  const walk=value=>{
+    if(!value||typeof value!=='object')return;
+    const label=cleanName(value.name?.fi||value.name||value['name-fi']||value.label?.fi||value.label||value.typeName?.fi);
+    const code=value['type-code']??value.typeCode??value.code;
+    if(Number.isFinite(Number(code))&&/ulkokunto|kuntoilupaikka|outdoor gym|street workout/i.test(label))fitnessCodes.push(Number(code));
+    Object.values(value).forEach(v=>{if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')walk(v)});
+  };
+  categoryItems.forEach(walk);
+  // Tunnetut LIPAS-tyypit toimivat varmistuksena, jos luokittelun tekstirakenne muuttuu.
+  const codes=[...new Set([...fitnessCodes,1130])];
+  const params=new URLSearchParams({'city-codes':'92','type-codes':codes.join(','),'page-size':'100'});
+  const payload=await fetchJson('https://api.lipas.fi/v2/sports-sites?'+params);
+  return listFromPayload(payload).map(site=>{
+    const p=coordinatesFromGeometry(site.location?.geometries||site.geometries||site.geometry);
+    const name=cleanName(site.name?.fi||site.name||site['name-fi']);
+    if(!p||!hasUsableName(name)||site.status==='out-of-service-permanently')return null;
+    return {...p,name,dist:distance(LAT,LON,p.lat,p.lon),url:site.www||mapLink(p.lat,p.lon),id:site['lipas-id']||site.id};
+  }).filter(x=>x&&x.dist<=1500).sort((a,b)=>a.dist-b.dist);
+}
+function serviceMapUnit(hit){return hit?.unit||hit?.object||hit?.data||hit}
+function serviceMapCoordinates(unit){
+  const c=unit?.location?.coordinates||unit?.coordinates;
+  if(Array.isArray(c)&&Number.isFinite(c[0])&&Number.isFinite(c[1]))return {lat:c[1],lon:c[0]};
+  const lat=Number(unit?.latitude??unit?.lat),lon=Number(unit?.longitude??unit?.lon);
+  return Number.isFinite(lat)&&Number.isFinite(lon)?{lat,lon}:null;
+}
+async function loadPlaygrounds(){
+  const params=new URLSearchParams({q:'leikkipaikka',municipality:'vantaa',type:'unit',language:'fi',page_size:'200'});
+  const payload=await fetchJson('https://api.hel.fi/servicemap/v2/search/?'+params);
+  return listFromPayload(payload).map(hit=>{
+    const unit=serviceMapUnit(hit),p=serviceMapCoordinates(unit);
+    const name=cleanName(unit?.name?.fi||unit?.name||hit?.name?.fi||hit?.name);
+    const id=unit?.id||hit?.id;
+    if(!p||!hasUsableName(name)||!/leikkipaikka/i.test(name))return null;
+    return {...p,name,dist:distance(LAT,LON,p.lat,p.lon),url:id?`https://palvelukartta.vantaa.fi/fi/unit/${id}`:mapLink(p.lat,p.lon),id};
+  }).filter(x=>x&&x.dist<=1000).sort((a,b)=>a.dist-b.dist);
+}
 async function nature(){
-  const fitnessList=document.getElementById('fitness-list'),playgroundList=document.getElementById('playground-list');
-  const q=`[out:json][timeout:15];(nwr(around:1500,${LAT},${LON})[leisure=fitness_station];nwr(around:1000,${LAT},${LON})[leisure=playground];);out center tags;`;
-  try{
-    const r=await fetch('https://overpass-api.de/api/interpreter',{method:'POST',body:q});
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const d=await r.json(),pts=d.elements.map(x=>({x,lat:x.lat||x.center?.lat,lon:x.lon||x.center?.lon})).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon));
-    const unique=(items)=>[...new Map(items.map(item=>[`${item.x.type}-${item.x.id}`,item])).values()];
-    const fitness=unique(pts.filter(o=>o.x.tags?.leisure==='fitness_station').map(o=>({...o,dist:distance(LAT,LON,o.lat,o.lon)})).filter(o=>o.dist<=1500&&hasUsablePlaceName(o)).sort((a,b)=>a.dist-b.dist));
-    const plays=unique(pts.filter(o=>o.x.tags?.leisure==='playground').map(o=>({...o,dist:distance(LAT,LON,o.lat,o.lon)})).filter(o=>o.dist<=1000&&hasUsablePlaceName(o)).sort((a,b)=>a.dist-b.dist));
-    fitnessList.innerHTML=fitness.length?placeListHTML(fitness):'<span class="muted">Ulkokuntosaleja ei löytynyt avoimesta karttadatasta.</span>';
-    playgroundList.innerHTML=plays.length?placeListHTML(plays):'<span class="muted">Leikkipaikkoja ei löytynyt avoimesta karttadatasta.</span>';
-  }catch(e){
-    console.error('Karttakohteiden haku epäonnistui:',e);mapNote.hidden=false;
+  const fitnessList=document.getElementById('fitness-list'),playgroundList=document.getElementById('playground-list'),mapNote=document.getElementById('map-note');
+  const [fitnessResult,playgroundResult]=await Promise.allSettled([loadFitness(),loadPlaygrounds()]);
+  if(fitnessResult.status==='fulfilled'){
+    const items=fitnessResult.value;
+    fitnessList.innerHTML=items.length?placeListHTML(items):'<span class="muted">Ulkokuntosaleja ei löytynyt 1,5 km säteeltä.</span>';
+  }else{
+    console.error('LIPAS-haku epäonnistui:',fitnessResult.reason);
     fitnessList.innerHTML='<span class="muted">Ulkokuntosaleja ei saatu juuri nyt.</span>';
+  }
+  if(playgroundResult.status==='fulfilled'){
+    const items=playgroundResult.value;
+    playgroundList.innerHTML=items.length?placeListHTML(items):'<span class="muted">Leikkipaikkoja ei löytynyt 1 km säteeltä.</span>';
+  }else{
+    console.error('Palvelukartta-haku epäonnistui:',playgroundResult.reason);
     playgroundList.innerHTML='<span class="muted">Leikkipaikkoja ei saatu juuri nyt.</span>';
   }
-}nature();
+  mapNote.hidden=fitnessResult.status==='fulfilled'&&playgroundResult.status==='fulfilled';
+  if(!mapNote.hidden)mapNote.textContent='Osa paikkatiedoista jäi lataamatta. Sää- ja auringonlaskutiedot toimivat silti.';
+}
+nature();
 function setNextLibraryBus(){
   const now=new Date(),next=new Date(now);let add=(4-now.getDay()+7)%7;
   if(add===0&&(now.getHours()>18||(now.getHours()===18&&now.getMinutes()>=45)))add=7;
