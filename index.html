@@ -366,108 +366,119 @@ body{position:fixed;inset:0}
   #v-outdoors .outdoors-footer .button{height:34px;min-height:34px!important}
 }
 
-/* iPhone safe area: yksi varaus, alapalkin omassa grid-rivissä. */
-:root{
-  --safe-top:env(safe-area-inset-top,0px);
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-  --tab-content-height:56px;
-  --tab-row-height:calc(var(--tab-content-height) + var(--safe-bottom));
-}
-html,body{
-  position:fixed!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  overflow:hidden!important;
-}
-.app{
-  display:grid!important;
-  grid-template-rows:minmax(0,1fr) var(--tab-row-height)!important;
-  width:100%!important;
-  height:100dvh!important;
-  min-height:0!important;
-  max-height:100dvh!important;
-  overflow:hidden!important;
-}
-.main{
-  position:relative!important;
-  min-height:0!important;
-  height:auto!important;
-  padding:0!important;
-  overflow:hidden!important;
-}
-.view{
-  position:absolute!important;
-  inset:4px 8px 6px!important;
-  min-height:0!important;
-  overflow:hidden!important;
-}
-.tabs{
-  position:relative!important;
-  inset:auto!important;
-  align-self:stretch!important;
-  width:100%!important;
-  height:var(--tab-row-height)!important;
-  min-height:var(--tab-row-height)!important;
-  padding:4px 8px var(--safe-bottom)!important;
-  overflow:hidden!important;
-  z-index:50!important;
-}
-.tab{height:52px!important;min-height:52px!important}
-.panel,.fixed-view,.outdoors-scroll{height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important}
+/* iPhone/mobile browser correction v4: fixed action rows and seamless safe area. */
+html,body{background:var(--surface)}
+.app{height:100svh!important;max-height:100svh!important;background:var(--bg)}
+.main{min-height:0;overflow:hidden}
 
-/* Safe areaa ei varata toista kertaa sisältöpaneelien sisällä. */
-#v-events .events-view,
-#v-outdoors .outdoors-scroll,
-#v-services .services-view{
-  padding-bottom:8px!important;
-}
+/* Events: the button is a fixed row, never part of the scrolling list. */
 #v-events .events-view{
-  grid-template-rows:auto auto auto minmax(0,1fr) 40px!important;
+  display:grid!important;
+  grid-template-rows:auto auto auto minmax(0,1fr) 48px!important;
+  height:100%;
+  min-height:0;
+  overflow:hidden!important;
+  gap:0;
+  padding:14px 16px 12px!important;
+}
+#v-events .events-view>.eyebrow{margin:0 0 3px}
+#v-events .events-view>h2{margin:0 0 4px}
+#v-events .events-intro{margin:0 0 9px!important}
+#v-events .events-scroller{
+  min-height:0;
+  height:auto!important;
+  overflow-y:auto!important;
+  padding:0 4px 5px 0!important;
 }
 #v-events .events-view>.button{
-  height:40px!important;
-  min-height:40px!important;
-  max-height:40px!important;
-  margin:0!important;
-  align-self:end!important;
+  align-self:stretch;
+  min-height:0!important;
+  height:42px!important;
+  margin:6px 0 0!important;
+  border-radius:13px;
+  position:relative;
+  z-index:5;
 }
+
+/* Outdoors: reserve explicit space for header, cards and footer. */
 #v-outdoors .outdoors-scroll{
-  grid-template-rows:auto auto minmax(0,1fr) auto auto!important;
+  display:grid!important;
+  grid-template-rows:auto auto minmax(0,1fr) auto!important;
+  height:100%;
+  min-height:0;
+  overflow:hidden!important;
+  padding:13px 14px 10px!important;
+  gap:0;
 }
+#v-outdoors .outdoors-scroll>.eyebrow{margin:0 0 3px}
+#v-outdoors .outdoors-scroll>h2{margin:0 0 7px}
+#v-outdoors .outdoor-list{
+  display:grid!important;
+  grid-template-rows:auto auto minmax(72px,1fr) minmax(72px,1fr)!important;
+  min-height:0;
+  overflow:hidden;
+  gap:6px!important;
+  margin:0!important;
+}
+#v-outdoors .outdoor{padding:8px 10px!important;border-radius:15px}
+#v-outdoors .places-card{min-height:0!important;height:auto!important}
+#v-outdoors .places-card .place-list{min-height:0;height:auto!important}
 #v-outdoors .outdoors-footer{
   display:grid!important;
-  grid-template-rows:38px auto!important;
+  grid-template-rows:40px auto!important;
   gap:3px!important;
-  min-height:50px!important;
-  max-height:none!important;
-  margin:4px 0 0!important;
-  overflow:visible!important;
+  min-height:0;
+  margin:6px 0 0!important;
+  padding:0!important;
 }
 #v-outdoors .outdoors-footer .button{
-  height:38px!important;
-  min-height:38px!important;
+  height:40px!important;
+  min-height:0!important;
   margin:0!important;
+  border-radius:13px;
 }
 #v-outdoors .outdoors-footer .source-note{
   margin:0 2px!important;
+  font-size:.49rem!important;
   line-height:1.05!important;
-  font-size:.5rem!important;
-  overflow:visible!important;
+  white-space:normal;
+  overflow:visible;
 }
-@media(max-height:650px){
-  :root{--tab-content-height:50px}
-  .tab{height:46px!important;min-height:46px!important}
-  #v-events .events-view{grid-template-rows:auto auto auto minmax(0,1fr) 36px!important}
-  #v-events .events-view>.button{height:36px!important;min-height:36px!important;max-height:36px!important}
-  #v-outdoors .outdoors-footer{grid-template-rows:34px auto!important;min-height:46px!important}
-  #v-outdoors .outdoors-footer .button{height:34px!important;min-height:34px!important}
+#v-outdoors .notice{margin:4px 0 0!important;padding:6px 8px!important;font-size:.67rem}
+
+/* Browser mode: remove the awkward grey gap and rounded top card below iOS status area. */
+@media (display-mode:browser){
+  html,body,.app{background:var(--surface)}
+  .main{background:var(--surface)}
+  .view{inset:0 0 0!important}
+  .panel{
+    border:0;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  .tabs{
+    border-top:1px solid var(--line);
+    background:var(--surface);
+  }
 }
-@media(display-mode:standalone){
-  .app{height:100dvh!important;max-height:100dvh!important}
+
+/* Short browser viewport, e.g. Safari with both toolbars visible. */
+@media(max-height:720px){
+  #v-events .events-view{grid-template-rows:auto auto auto minmax(0,1fr) 43px!important;padding:10px 13px 8px!important}
+  #v-events .events-view>.eyebrow{display:none}
+  #v-events .events-view>h2{font-size:1.45rem}
+  #v-events .events-intro{font-size:.72rem;margin-bottom:5px!important}
+  #v-events .events-view>.button{height:37px!important;margin-top:4px!important}
+  #v-outdoors .outdoors-scroll{padding:9px 11px 6px!important}
+  #v-outdoors .outdoors-scroll>.eyebrow{display:none}
+  #v-outdoors .outdoors-scroll>h2{font-size:1.4rem;margin-bottom:5px}
+  #v-outdoors .outdoor-list{grid-template-rows:auto auto minmax(62px,1fr) minmax(62px,1fr)!important;gap:5px!important}
+  #v-outdoors .outdoors-footer{grid-template-rows:36px auto!important;margin-top:4px!important}
+  #v-outdoors .outdoors-footer .button{height:36px!important}
+  #v-outdoors .outdoors-footer .source-note{font-size:.45rem!important}
 }
 </style></head><body><div class="app"><main class="main">
-<section class="view active" id="v-home"><div class="panel home-panel" id="home-panel"><div class="scroll"><p class="eyebrow paikalla-line"><strong>Paikalla -</strong> <strong>Sinulle juuri nyt.</strong></p><h2 class="hello" id="hello">Hyvää päivää Leinelä</h2><p class="muted" id="date"></p><div class="hero"><div class="emoji" id="wicon">🌤️</div><div><div class="temp" id="temp">–°</div><div class="muted" id="condition">Haetaan säätä…</div></div></div><div class="grid"><div class="metric"><small>Tuntuu</small><strong id="feels">–°</strong></div><div class="metric"><small>Tänään</small><strong id="range">– / –</strong></div><div class="metric"><small>Sade</small><strong id="rain">– %</strong></div></div><h3 class="section-title">Seuraavat menot lähellä</h3><div id="home-events"><p class="muted">Haetaan tapahtumia…</p></div><h3 class="section-title">Seuraava kirjastoauto</h3><div class="event library-next"><strong id="next-library-date">Lasketaan päivämäärää…</strong><span>klo 18.30–18.45 · Leineläntie 11</span></div></div><div class="home-transport" id="home-transport"><iframe id="transport-frame" title="HSL lähdöt" loading="lazy"></iframe></div><div class="quick-departures" aria-label="Lähtönäytöt"><button class="departure-button" data-frame="train" aria-pressed="false">Juna-asema</button><button class="departure-button" data-frame="bus" aria-pressed="false">Bussit</button></div></div></section>  <section class="view" id="v-events" hidden><div class="panel fixed-panel events-panel"><div class="scroll fixed-view events-view"><p class="eyebrow">Kalenteri</p><h2>Menot lähellä</h2><p class="muted">Tulevat tapahtumat Leinelän lähialueella.</p><div id="events" class="inner-scroller events-scroller"><p>Haetaan tapahtumia…</p></div><a class="button" href="https://tapahtumat.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan tapahtumakalenteri</a></div></div></section>
+<section class="view active" id="v-home"><div class="panel home-panel" id="home-panel"><div class="scroll"><p class="eyebrow paikalla-line"><strong>Paikalla -</strong> <strong>Sinulle juuri nyt.</strong></p><h2 class="hello" id="hello">Hyvää päivää Leinelä</h2><p class="muted" id="date"></p><div class="hero"><div class="emoji" id="wicon">🌤️</div><div><div class="temp" id="temp">–°</div><div class="muted" id="condition">Haetaan säätä…</div></div></div><div class="grid"><div class="metric"><small>Tuntuu</small><strong id="feels">–°</strong></div><div class="metric"><small>Tänään</small><strong id="range">– / –</strong></div><div class="metric"><small>Sade</small><strong id="rain">– %</strong></div></div><h3 class="section-title">Seuraavat menot lähellä</h3><div id="home-events"><p class="muted">Haetaan tapahtumia…</p></div><h3 class="section-title">Seuraava kirjastoauto</h3><div class="event library-next"><strong id="next-library-date">Lasketaan päivämäärää…</strong><span>klo 18.30–18.45 · Leineläntie 11</span></div></div><div class="home-transport" id="home-transport"><iframe id="transport-frame" title="HSL lähdöt" loading="lazy"></iframe></div><div class="quick-departures" aria-label="Lähtönäytöt"><button class="departure-button" data-frame="train" aria-pressed="false">Juna-asema</button><button class="departure-button" data-frame="bus" aria-pressed="false">Bussit</button></div></div></section>  <section class="view" id="v-events" hidden><div class="panel fixed-panel events-panel"><div class="scroll fixed-view events-view"><p class="eyebrow">Kalenteri</p><h2>Menot lähellä</h2><p class="muted events-intro">Tulevat tapahtumat Leinelän lähialueella.</p><div id="events" class="inner-scroller events-scroller"><p>Haetaan tapahtumia…</p></div><a class="button" href="https://tapahtumat.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan tapahtumakalenteri</a></div></div></section>
 <section class="view" id="v-outdoors" hidden><div class="panel outdoors-panel"><div class="scroll outdoors-scroll"><p class="eyebrow">Lähde ulos</p><h2>Ulkoilu ja liikunta</h2><div class="outdoor-list"><div class="outdoor"><div class="bigicon" id="dry-icon">🌤️</div><div><b id="dry-text">Tarkistetaan seuraavat 3 tuntia…</b><span id="dry-detail"></span></div></div><div class="outdoor"><div class="bigicon">🌇</div><div><b id="sunset">Aurinko laskee –</b><span>Leinelän paikallisaika</span></div></div><div class="outdoor places-card"><div class="bigicon">🏋️</div><div class="outdoor-content"><b>Ulkokuntosalit 1,5 km säteellä</b><div id="fitness-list" class="place-list"><span class="muted">Haetaan ulkokuntosaleja…</span></div></div></div><div class="outdoor places-card"><div class="bigicon">🛝</div><div class="outdoor-content"><b>Leikkipaikat 1 km säteellä</b><div id="playground-list" class="place-list"><span class="muted">Haetaan leikkipaikkoja…</span></div></div></div></div><div class="notice" id="map-note" hidden>Karttakohteita ei saatu juuri nyt. Sää- ja auringonlaskutiedot toimivat silti.</div><div class="outdoors-footer"><a class="button" href="https://kartta.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan kartta</a><p class="muted source-note">Liikuntapaikat: LIPAS / Jyväskylän yliopisto. Leikkipaikat: Pääkaupunkiseudun Palvelukartta. CC BY 4.0.</p></div></div></div></section>
 <section class="view" id="v-services" hidden><div class="panel fixed-panel services-panel"><div class="scroll fixed-view services-view"><p class="eyebrow">Arjen apuna</p><h2>Lähipalvelut</h2><div class="services inner-scroller services-scroller"><div class="card"><small>Kirjastoauto</small><strong>Torstaisin 18.30–18.45</strong><p class="muted">Leineläntie 11</p></div><div class="card"><small>Jätskiauto</small><strong>Palaa maaliskuussa</strong><p class="muted">Reitti ja kellonajat lisätään, kun ne julkaistaan.</p></div></div></div></div></section>
 </main><nav class="tabs"><button class="tab" data-v="home" data-title="Etusivu" aria-selected="true"><i><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/></svg></i><span>Etusivu</span></button><button class="tab" data-v="events" data-title="Menot" aria-selected="false"><i><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></i><span>Menot</span></button><button class="tab" data-v="outdoors" data-title="Ulkoilu ja liikunta" aria-selected="false"><i><svg viewBox="0 0 24 24"><path d="m12 3-5 7h3l-5 7h14l-5-7h3Z"/><path d="M12 17v4"/></svg></i><span>Ulkoilu ja liikunta</span></button><button class="tab" data-v="services" data-title="Palvelut" aria-selected="false"><i><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></i><span>Palvelut</span></button></nav></div><script>
