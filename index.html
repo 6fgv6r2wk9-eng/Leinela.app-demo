@@ -63,9 +63,66 @@
 .paikalla-line strong:first-child{color:var(--accent);font-weight:850}
 .paikalla-line strong:last-child{font-weight:650;color:var(--muted)}
 @media(max-width:340px){.paikalla-line{font-size:.72rem}}
+
+/* Ulkoilu ja liikunta: itse sivu pysyy paikallaan, vain paikkalistat vierivät. */
+#v-outdoors .outdoors-panel{height:100%;overflow:hidden}
+#v-outdoors .outdoors-scroll{
+  display:grid;
+  grid-template-rows:auto auto minmax(0,1fr) auto auto auto;
+  height:100%;
+  min-height:0;
+  overflow:hidden;
+  padding:16px;
+}
+#v-outdoors .outdoors-scroll>.eyebrow{margin-bottom:4px}
+#v-outdoors .outdoors-scroll>h2{margin-bottom:8px}
+#v-outdoors .outdoor-list{
+  display:grid;
+  grid-template-rows:auto auto minmax(92px,1fr) minmax(92px,1fr);
+  min-height:0;
+  gap:8px;
+  margin-top:0;
+  overflow:hidden;
+}
+#v-outdoors .outdoor{padding:11px 13px;border-radius:16px}
+#v-outdoors .places-card{min-height:0;overflow:hidden}
+#v-outdoors .places-card .outdoor-content{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  width:100%;
+}
+#v-outdoors .places-card .place-list{
+  min-height:0;
+  flex:1 1 auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:#a9b8af transparent;
+  touch-action:pan-y;
+  padding-right:5px;
+}
+#v-outdoors .places-card .place-list::-webkit-scrollbar{width:4px}
+#v-outdoors .places-card .place-list::-webkit-scrollbar-thumb{background:#a9b8af;border-radius:999px}
+#v-outdoors .places-card .place-list::-webkit-scrollbar-track{background:transparent}
+#v-outdoors .notice{margin-top:7px;padding:8px 10px}
+#v-outdoors .button{min-height:42px;margin-top:8px}
+#v-outdoors .source-note{margin-top:6px;line-height:1.2}
+@media(max-height:700px){
+  #v-outdoors .outdoors-scroll{padding:11px 13px 9px}
+  #v-outdoors .outdoors-scroll>.eyebrow{display:none}
+  #v-outdoors .outdoors-scroll>h2{font-size:1.4rem;margin-bottom:6px}
+  #v-outdoors .outdoor-list{grid-template-rows:auto auto minmax(76px,1fr) minmax(76px,1fr);gap:6px}
+  #v-outdoors .outdoor{padding:8px 10px}
+  #v-outdoors .bigicon{width:31px;height:31px;flex-basis:31px}
+  #v-outdoors .button{min-height:38px;margin-top:6px}
+  #v-outdoors .source-note{font-size:.58rem!important;margin-bottom:0}
+}
 </style></head><body><div class="app"><main class="main">
 <section class="view active" id="v-home"><div class="panel home-panel" id="home-panel"><div class="scroll"><p class="eyebrow paikalla-line"><strong>Paikalla -</strong> <strong>Sinulle juuri nyt.</strong></p><h2 class="hello" id="hello">Hyvää päivää Leinelä</h2><p class="muted" id="date"></p><div class="hero"><div class="emoji" id="wicon">🌤️</div><div><div class="temp" id="temp">–°</div><div class="muted" id="condition">Haetaan säätä…</div></div></div><div class="grid"><div class="metric"><small>Tuntuu</small><strong id="feels">–°</strong></div><div class="metric"><small>Tänään</small><strong id="range">– / –</strong></div><div class="metric"><small>Sade</small><strong id="rain">– %</strong></div></div><h3 class="section-title">Seuraavat menot lähellä</h3><div id="home-events"><p class="muted">Haetaan tapahtumia…</p></div><h3 class="section-title">Seuraava kirjastoauto</h3><div class="event library-next"><strong id="next-library-date">Lasketaan päivämäärää…</strong><span>klo 18.30–18.45 · Leineläntie 11</span></div></div><div class="home-transport" id="home-transport"><iframe id="transport-frame" title="HSL lähdöt" loading="lazy"></iframe></div><div class="quick-departures" aria-label="Lähtönäytöt"><button class="departure-button" data-frame="train" aria-pressed="false">Juna-asema</button><button class="departure-button" data-frame="bus" aria-pressed="false">Bussit</button></div></div></section>  <section class="view" id="v-events" hidden><div class="panel"><div class="scroll"><p class="eyebrow">Kalenteri</p><h2>Menot lähellä</h2><p class="muted">Tulevat tapahtumat Leinelän lähialueella.</p><div id="events"><p>Haetaan tapahtumia…</p></div><a class="button" href="https://tapahtumat.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan tapahtumakalenteri</a></div></div></section>
-<section class="view" id="v-outdoors" hidden><div class="panel"><div class="scroll"><p class="eyebrow">Lähde ulos</p><h2>Ulkoilu ja liikunta</h2><div class="outdoor-list"><div class="outdoor"><div class="bigicon" id="dry-icon">🌤️</div><div><b id="dry-text">Tarkistetaan seuraavat 3 tuntia…</b><span id="dry-detail"></span></div></div><div class="outdoor"><div class="bigicon">🌇</div><div><b id="sunset">Aurinko laskee –</b><span>Leinelän paikallisaika</span></div></div><div class="outdoor"><div class="bigicon">🏋️</div><div class="outdoor-content"><b>Ulkokuntosalit 1,5 km säteellä</b><div id="fitness-list" class="place-list"><span class="muted">Haetaan ulkokuntosaleja…</span></div></div></div><div class="outdoor"><div class="bigicon">🛝</div><div class="outdoor-content"><b>Leikkipaikat 1 km säteellä</b><div id="playground-list" class="place-list"><span class="muted">Haetaan leikkipaikkoja…</span></div></div></div></div><div class="notice" id="map-note" hidden>Karttakohteita ei saatu juuri nyt. Sää- ja auringonlaskutiedot toimivat silti.</div><a class="button" href="https://kartta.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan kartta</a><p class="muted source-note">Liikuntapaikat: LIPAS / Jyväskylän yliopisto. Leikkipaikat: Pääkaupunkiseudun Palvelukartta. CC BY 4.0.</p></div></div></section>
+<section class="view" id="v-outdoors" hidden><div class="panel outdoors-panel"><div class="scroll outdoors-scroll"><p class="eyebrow">Lähde ulos</p><h2>Ulkoilu ja liikunta</h2><div class="outdoor-list"><div class="outdoor"><div class="bigicon" id="dry-icon">🌤️</div><div><b id="dry-text">Tarkistetaan seuraavat 3 tuntia…</b><span id="dry-detail"></span></div></div><div class="outdoor"><div class="bigicon">🌇</div><div><b id="sunset">Aurinko laskee –</b><span>Leinelän paikallisaika</span></div></div><div class="outdoor places-card"><div class="bigicon">🏋️</div><div class="outdoor-content"><b>Ulkokuntosalit 1,5 km säteellä</b><div id="fitness-list" class="place-list"><span class="muted">Haetaan ulkokuntosaleja…</span></div></div></div><div class="outdoor places-card"><div class="bigicon">🛝</div><div class="outdoor-content"><b>Leikkipaikat 1 km säteellä</b><div id="playground-list" class="place-list"><span class="muted">Haetaan leikkipaikkoja…</span></div></div></div></div><div class="notice" id="map-note" hidden>Karttakohteita ei saatu juuri nyt. Sää- ja auringonlaskutiedot toimivat silti.</div><a class="button" href="https://kartta.vantaa.fi/" target="_blank" rel="noopener">Avaa Vantaan kartta</a><p class="muted source-note">Liikuntapaikat: LIPAS / Jyväskylän yliopisto. Leikkipaikat: Pääkaupunkiseudun Palvelukartta. CC BY 4.0.</p></div></div></section>
 <section class="view" id="v-services" hidden><div class="panel"><div class="scroll"><p class="eyebrow">Arjen apuna</p><h2>Lähipalvelut</h2><div class="services"><div class="card"><small>Kirjastoauto</small><strong>Torstaisin 18.30–18.45</strong><p class="muted">Leineläntie 11</p></div><div class="card"><small>Jätskiauto</small><strong>Palaa maaliskuussa</strong><p class="muted">Reitti ja kellonajat lisätään, kun ne julkaistaan.</p></div></div></div></div></section>
 </main><nav class="tabs"><button class="tab" data-v="home" data-title="Etusivu" aria-selected="true"><i><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/></svg></i><span>Etusivu</span></button><button class="tab" data-v="events" data-title="Menot" aria-selected="false"><i><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></i><span>Menot</span></button><button class="tab" data-v="outdoors" data-title="Ulkoilu ja liikunta" aria-selected="false"><i><svg viewBox="0 0 24 24"><path d="m12 3-5 7h3l-5 7h14l-5-7h3Z"/><path d="M12 17v4"/></svg></i><span>Ulkoilu ja liikunta</span></button><button class="tab" data-v="services" data-title="Palvelut" aria-selected="false"><i><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></i><span>Palvelut</span></button></nav></div><script>
 const LAT=60.32497980169792,LON=25.039877144283047,tabs=[...document.querySelectorAll('.tab')],views=[...document.querySelectorAll('.view')];function openTab(t){const v=document.getElementById('v-'+t.dataset.v);tabs.forEach(x=>x.setAttribute('aria-selected',x===t));views.forEach(x=>{let on=x===v;x.hidden=!on;x.classList.toggle('active',on)});history.replaceState(null,'','#'+t.dataset.v)}tabs.forEach(t=>t.onclick=()=>openTab(t));
