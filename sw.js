@@ -1,4 +1,4 @@
-const CACHE='paikalla-v3';
+const CACHE='paikalla-v4';
 const ASSETS=['./','./index.html','./site.webmanifest','./favicon.ico','./favicon-16x16.png','./favicon-32x32.png','./favicon-48x48.png','./apple-touch-icon.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
